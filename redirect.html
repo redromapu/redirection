@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirection</title>
+</head>
+<body>
+    <script>
+        // Récupérer les paramètres de l'URL
+        var params = new URLSearchParams(window.location.search);
+        var key = params.get('key');
+        var p = params.get('p');
+        var a = params.get('a');
+        var gclid = params.get('gclid');
+        var loc_physical_ms = params.get('loc_physical_ms');
+
+        // Tableau des redirections
+        var redirects = {
+            'td1': 'https://clk.tradedoubler.com/click',
+            'td2': 'https://clk.tradedoubler.com/click',
+            'ae324': 'https://wegoboard.com/#ae324',
+            'ae105': 'https://wegoboard.com/#ae105'
+            // Ajoutez ici d'autres liens de redirection au besoin
+        };
+
+        if (redirects[key]) {
+            var destination = redirects[key];
+            var queryParams = new URLSearchParams();
+
+            if (gclid) queryParams.append('gclid', gclid);
+            if (loc_physical_ms) queryParams.append('loc_physical_ms', loc_physical_ms);
+            if (p) queryParams.append('p', p);
+            if (a) queryParams.append('a', a);
+
+            var redirectUrl = destination + '?' + queryParams.toString();
+            window.location.href = redirectUrl;
+        } else {
+            window.location.href = 'https://wegoboard.com';
+        }
+    </script>
+</body>
+</html>
